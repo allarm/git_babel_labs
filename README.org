@@ -1,0 +1,8 @@
+* Git Literate Labs
+
+This is my attempt with idempotent literate Git labs made with Org-Babel in Emacs. 
+
+If you want to re-use it, make sure you have changed the =#+properties= setting (specifically the =:dir= value) to your local preferences.
+
+Everything else should be working with the default settings. I use Emacs v27.1 with Org-Mode v9.3.7 - though it should be working on earlier versions as well.
+

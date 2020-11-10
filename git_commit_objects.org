@@ -1,0 +1,141 @@
+#+title: Git - Commit Objects
+#+roam_tags: git objects commit
+
+Commit objects
+
+* Lab | ~C-c on the property string first!~
+
+#+property: header-args :dir /Users/allarm/Tmp/git_lab_1 :results output drawer :var gitpath="/Users/allarm/Tmp/git_lab_1"
+
+** Clean it up | ~execute it first~
+
+#+begin_src bash 
+# Stupid test
+case $(pwd) in
+,*git_lab_1*)
+    cd ..
+    rm -rf git_lab_1
+    mkdir git_lab_1
+    cd git_lab_1
+    pwd
+    ls -al
+    ;;
+  ,*)
+    echo "You're in a wrong directory pal: $(pwd)."
+    ;;
+esac
+#+end_src
+
+#+RESULTS:
+:results:
+/Users/allarm/Tmp/git_lab_1
+total 0
+drwxr-xr-x   2 allarm  staff   64 Nov 10 17:24 .
+drwxr-xr-x  23 allarm  staff  736 Nov 10 17:24 ..
+:end:
+
+** Set it up
+
+#+begin_src bash
+echo "Hello world!" > hello.txt
+echo "Goodbye world :(" > goodbye.txt
+mkdir awesome_dir
+echo "I am awesome!" > awesome_dir/awesome.txt
+git init
+git config user.name "Andrey Che"
+git config user.email "andrey@che.org"
+git add .
+git commit -m "First commit"
+#+end_src
+
+#+RESULTS:
+:results:
+Initialized empty Git repository in /Users/allarm/Tmp/git_lab_1/.git/
+[master (root-commit) 1d321d2] First commit
+ 3 files changed, 3 insertions(+)
+ create mode 100644 awesome_dir/awesome.txt
+ create mode 100644 goodbye.txt
+ create mode 100644 hello.txt
+:end:
+
+** Let's roll
+
+Let's get the file objects:
+
+#+begin_src bash
+objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
+for o in $objects
+do
+  echo "$o : $(git cat-file -t $o)"
+done
+#+end_src
+
+#+RESULTS:
+:results:
+ed557584085e6ecbc79a01adb943fdba7a05f5f0 : tree
+c12fddafdaba3b7b1281f50c9e482ed673f1767c : blob
+27c68820a14130e9866371d6cb746ca5cbd39864 : tree
+11dd309e25ce41320f8b55ef3be7d50246a8b4a6 : blob
+cd0875583aabe89ee197ea133980a9085d08e497 : blob
+1d321d27daff24b220fbd52faa6d5aa48d59b1ee : commit
+:end:
+
+Now let's take a loot at the contents of the commit objects.
+
+#+begin_src bash
+objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
+for o in $objects
+do
+  type=$(git cat-file -t $o)
+  if [ $type == "commit" ]
+  then
+    echo "[ $o : $type ]"
+    echo
+    git cat-file -p $o
+    echo
+  fi
+done
+#+end_src
+
+#+RESULTS:
+:results:
+[ 1d321d27daff24b220fbd52faa6d5aa48d59b1ee : commit ]
+
+tree 27c68820a14130e9866371d6cb746ca5cbd39864
+author Andrey Che <andrey@che.org> 1605000285 +0800
+committer Andrey Che <andrey@che.org> 1605000285 +0800
+
+First commit
+
+:end:
+
+The [[file:git_tree_objects.org][tree object]] (==27c6=) points to the files in the root directory *and* to another tree object, that is referencing the file inside the =awesome_dir=:
+
+#+begin_src bash
+objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
+for o in $objects
+do
+  type=$(git cat-file -t $o)
+  if [ $type == "tree" ]
+  then
+    echo "[ $o : $type ]"
+    echo
+    git cat-file -p $o
+    echo
+  fi
+done
+#+end_src
+
+#+RESULTS:
+:results:
+[ ed557584085e6ecbc79a01adb943fdba7a05f5f0 : tree ]
+
+100644 blob 11dd309e25ce41320f8b55ef3be7d50246a8b4a6	awesome.txt
+
+[ 27c68820a14130e9866371d6cb746ca5cbd39864 : tree ]
+
+040000 tree ed557584085e6ecbc79a01adb943fdba7a05f5f0	awesome_dir
+100644 blob c12fddafdaba3b7b1281f50c9e482ed673f1767c	goodbye.txt
+100644 blob cd0875583aabe89ee197ea133980a9085d08e497	hello.txt
+
+:end:
