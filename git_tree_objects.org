@@ -5,7 +5,7 @@ Tree objects.
 
 * Lab | ~C-c on the property string first!~
 
-#+property: header-args :dir /Users/allarm/Tmp/git_lab_1 :results output :wrap "example" :exports both
+#+property: header-args :dir /Users/allarm/Tmp/git_lab_1 :results output :wrap "src" :exports both
 
 ** Clean it up | ~execute it first~
 
@@ -26,12 +26,12 @@ esac
 #+end_src
 
 #+RESULTS:
-#+begin_example
+#+begin_src
 /Users/allarm/Tmp/git_lab_1
 total 0
-drwxr-xr-x   2 allarm  staff   64 Nov 10 17:52 .
-drwxr-xr-x  24 allarm  staff  768 Nov 10 17:52 ..
-#+end_example
+drwxr-xr-x   2 allarm  staff   64 Nov 10 17:59 .
+drwxr-xr-x  24 allarm  staff  768 Nov 10 17:59 ..
+#+end_src
 
 ** Set it up
 
@@ -48,14 +48,14 @@ git commit -m "First commit"
 #+end_src
 
 #+RESULTS:
-#+begin_example
+#+begin_src
 Initialized empty Git repository in /Users/allarm/Tmp/git_lab_1/.git/
-[master (root-commit) 3c305bd] First commit
+[master (root-commit) b7b1813] First commit
  3 files changed, 3 insertions(+)
  create mode 100644 awesome_dir/awesome.txt
  create mode 100644 goodbye.txt
  create mode 100644 hello.txt
-#+end_example
+#+end_src
 
 ** Let's roll
 
@@ -70,14 +70,14 @@ done
 #+end_src
 
 #+RESULTS:
-#+begin_example
-3c305bd2c0a01f016d54e6cc11a4b2b9d099b439 : commit
+#+begin_src
 ed557584085e6ecbc79a01adb943fdba7a05f5f0 : tree
 c12fddafdaba3b7b1281f50c9e482ed673f1767c : blob
 27c68820a14130e9866371d6cb746ca5cbd39864 : tree
 11dd309e25ce41320f8b55ef3be7d50246a8b4a6 : blob
+b7b181343380c845697528305eb58f5adb7fc419 : commit
 cd0875583aabe89ee197ea133980a9085d08e497 : blob
-#+end_example
+#+end_src
 
 Now let's take a look at the contents of the =tree= objects.
 
@@ -97,7 +97,7 @@ done
 #+end_src
 
 #+RESULTS:
-#+begin_example
+#+begin_src
 [ ed557584085e6ecbc79a01adb943fdba7a05f5f0 : tree ]
 
 100644 blob 11dd309e25ce41320f8b55ef3be7d50246a8b4a6	awesome.txt
@@ -108,7 +108,7 @@ done
 100644 blob c12fddafdaba3b7b1281f50c9e482ed673f1767c	goodbye.txt
 100644 blob cd0875583aabe89ee197ea133980a9085d08e497	hello.txt
 
-#+end_example
+#+end_src
 
 There are 2 =tree= objects in the repo. One is pointing to the file in the =awesome_dir= and another points to the files in the root dir *and* to the first tree object.
 
