@@ -9,7 +9,7 @@ Commit objects
 
 ** Clean it up | ~execute it first~
 
-#+begin_src bash 
+#+begin_src bash :exports both 
 case $(pwd) in
 ,*git_lab_1*)
     cd ..
@@ -29,13 +29,13 @@ esac
 #+begin_example
 /Users/allarm/Tmp/git_lab_1
 total 0
-drwxr-xr-x   2 allarm  staff   64 Nov 10 17:46 .
-drwxr-xr-x  24 allarm  staff  768 Nov 10 17:46 ..
+drwxr-xr-x   2 allarm  staff   64 Nov 10 18:13 .
+drwxr-xr-x  24 allarm  staff  768 Nov 10 18:13 ..
 #+end_example
 
 ** Set it up
 
-#+begin_src bash
+#+begin_src bash :exports both 
 echo "Hello world!" > hello.txt
 echo "Goodbye world :(" > goodbye.txt
 mkdir awesome_dir
@@ -50,7 +50,7 @@ git commit -m "First commit"
 #+RESULTS:
 #+begin_example
 Initialized empty Git repository in /Users/allarm/Tmp/git_lab_1/.git/
-[master (root-commit) a47e4f6] First commit
+[master (root-commit) a5190c2] First commit
  3 files changed, 3 insertions(+)
  create mode 100644 awesome_dir/awesome.txt
  create mode 100644 goodbye.txt
@@ -61,7 +61,7 @@ Initialized empty Git repository in /Users/allarm/Tmp/git_lab_1/.git/
 
 Let's get the file objects:
 
-#+begin_src bash
+#+begin_src bash :exports both 
 objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
 for o in $objects
 do
@@ -71,7 +71,7 @@ done
 
 #+RESULTS:
 #+begin_example
-a47e4f6f23f5f457adb4b2fd1aeade0ab0c090e3 : commit
+a5190c25b9e06511399c4340382238ae7e22a126 : commit
 ed557584085e6ecbc79a01adb943fdba7a05f5f0 : tree
 c12fddafdaba3b7b1281f50c9e482ed673f1767c : blob
 27c68820a14130e9866371d6cb746ca5cbd39864 : tree
@@ -81,7 +81,7 @@ cd0875583aabe89ee197ea133980a9085d08e497 : blob
 
 Now let's take a loot at the contents of the commit objects.
 
-#+begin_src bash
+#+begin_src bash :exports both 
 objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
 for o in $objects
 do
@@ -98,11 +98,11 @@ done
 
 #+RESULTS:
 #+begin_example
-[ a47e4f6f23f5f457adb4b2fd1aeade0ab0c090e3 : commit ]
+[ a5190c25b9e06511399c4340382238ae7e22a126 : commit ]
 
 tree 27c68820a14130e9866371d6cb746ca5cbd39864
-author Andrey Che <andrey@che.org> 1605001619 +0800
-committer Andrey Che <andrey@che.org> 1605001619 +0800
+author Andrey Che <andrey@che.org> 1605003225 +0800
+committer Andrey Che <andrey@che.org> 1605003225 +0800
 
 First commit
 
@@ -110,7 +110,7 @@ First commit
 
 The [[file:git_tree_objects.org][tree object]] (==27c6=) points to the files in the root directory *and* to another tree object, that is referencing the file inside the =awesome_dir=:
 
-#+begin_src bash
+#+begin_src bash :exports both 
 objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
 for o in $objects
 do

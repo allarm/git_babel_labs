@@ -9,7 +9,7 @@ Staging / index.
 
 ** Clean it up | ~execute it first~
 
-#+begin_src bash 
+#+begin_src bash :exports both
 case $(pwd) in
 ,*git_lab_1*)
     cd ..
@@ -29,13 +29,13 @@ esac
 #+begin_example
 /Users/allarm/Tmp/git_lab_1
 total 0
-drwxr-xr-x   2 allarm  staff   64 Nov 10 17:47 .
-drwxr-xr-x  24 allarm  staff  768 Nov 10 17:47 ..
+drwxr-xr-x   2 allarm  staff   64 Nov 10 18:11 .
+drwxr-xr-x  24 allarm  staff  768 Nov 10 18:11 ..
 #+end_example
 
 ** Set it up
 
-#+begin_src bash
+#+begin_src bash :exports both 
 echo "Hello world!" > hello.txt
 echo "Goodbye world :(" > goodbye.txt
 mkdir awesome_dir
@@ -61,7 +61,7 @@ Currently, we added a couple of file to staging (or index). Nothing has been com
 
 Let's check the file tree.
 
-#+begin_src bash
+#+begin_src bash :exports both 
 tree .git -I *sample
 #+end_src
 
@@ -95,7 +95,7 @@ The =refs= dir is empty.
 
 Now let's get the file objects:
 
-#+begin_src bash
+#+begin_src bash :exports both 
 objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
 for o in $objects
 do
@@ -112,14 +112,14 @@ cd0875583aabe89ee197ea133980a9085d08e497 : blob
 
 Let's check what would change after the commit.
 
-#+begin_src bash
+#+begin_src bash :exports both 
 git commit -m "First commit"
 tree .git -I *sample
 #+end_src
 
 #+RESULTS:
 #+begin_example
-[master (root-commit) 79365ab] First commit
+[master (root-commit) 55c2ff5] First commit
  3 files changed, 3 insertions(+)
  create mode 100644 awesome_dir/awesome.txt
  create mode 100644 goodbye.txt
@@ -143,8 +143,8 @@ tree .git -I *sample
 |   |   `-- dd309e25ce41320f8b55ef3be7d50246a8b4a6
 |   |-- 27
 |   |   `-- c68820a14130e9866371d6cb746ca5cbd39864
-|   |-- 79
-|   |   `-- 365ab0068cc57a9b446d04078e0398b99abdbf
+|   |-- 55
+|   |   `-- c2ff56b2d2c3b08c3e5680280a84a69a83a7d9
 |   |-- c1
 |   |   `-- 2fddafdaba3b7b1281f50c9e482ed673f1767c
 |   |-- cd
@@ -161,7 +161,7 @@ tree .git -I *sample
 17 directories, 15 files
 #+end_example
 
-#+begin_src bash
+#+begin_src bash :exports both 
 objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
 for o in $objects
 do
@@ -175,13 +175,13 @@ ed557584085e6ecbc79a01adb943fdba7a05f5f0 : tree
 c12fddafdaba3b7b1281f50c9e482ed673f1767c : blob
 27c68820a14130e9866371d6cb746ca5cbd39864 : tree
 11dd309e25ce41320f8b55ef3be7d50246a8b4a6 : blob
+55c2ff56b2d2c3b08c3e5680280a84a69a83a7d9 : commit
 cd0875583aabe89ee197ea133980a9085d08e497 : blob
-79365ab0068cc57a9b446d04078e0398b99abdbf : commit
 #+end_example
 
 3 blobs that had been there before the commit remain unchanged. There are 2 new [[file:git_tree_objects.org][tree objects]]. One is a pointer to the files in a root directory (*and* to the =awesome_dir= sitting inside this directory) and another one points to the files in =awesome_dir=:
 
-#+begin_src bash
+#+begin_src bash :exports both 
 objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
 for o in $objects
 do
@@ -212,7 +212,7 @@ done
 
 There's also a new [[file:git_commit_objects.org][commit object]] referencing the root tree (=27c6=):
 
-#+begin_src bash
+#+begin_src bash :exports both 
 objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
 for o in $objects
 do
@@ -229,11 +229,11 @@ done
 
 #+RESULTS:
 #+begin_example
-[ 79365ab0068cc57a9b446d04078e0398b99abdbf : commit ]
+[ 55c2ff56b2d2c3b08c3e5680280a84a69a83a7d9 : commit ]
 
 tree 27c68820a14130e9866371d6cb746ca5cbd39864
-author Andrey Che <andrey@che.org> 1605001690 +0800
-committer Andrey Che <andrey@che.org> 1605001690 +0800
+author Andrey Che <andrey@che.org> 1605003146 +0800
+committer Andrey Che <andrey@che.org> 1605003146 +0800
 
 First commit
 
