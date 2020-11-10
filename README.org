@@ -10,9 +10,8 @@ There's an annoying [[https://github.com/wallyqs/org-ruby/issues/62][bug]] in th
 
 ** Directory
 
- [[file:git_blobs.org::+title: Git - Blob Objects][Blob objects]]
- [[file:git_commit_objects.org::+title: Git - Commit Objects][Commit objects]]
- [[file:git_tree_objects.org::+title: Git - Tree Objects][Tree objects]] 
- [[file:git_staging.org::+title: Git - Staging][Staging]]
-
+- [[file:git_blobs.org][Blob objects]]
+- [[file:git_commit_objects.org][Commit objects]]
+- [[file:git_tree_objects.org][Tree objects]]
+- [[file:git_staging.org][Staging]]
 
