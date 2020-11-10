@@ -1,8 +1,18 @@
-* Git Literate Labs
+* Git Literate Labs Example
 
-This is my attempt with idempotent literate Git labs made with Org-Babel in Emacs. 
+This is my attempt with idempotent literate Git labs made with [[https://orgmode.org/][Org-Mode]] and [[https://orgmode.org/worg/org-contrib/babel/][Org-Babel]] in [[https://www.gnu.org/software/emacs/][Emacs]]. 
 
 If you want to re-use it, make sure you have changed the =#+properties= setting (specifically the =:dir= value) to your local preferences.
 
-Everything else should be working with the default settings. I use Emacs v27.1 with Org-Mode v9.3.7 - though it should be working on earlier versions as well.
+Everything else should be working with the default settings. I use Emacs v27.1 with Org-Mode v9.3.7 - though it should be working in earlier versions as well.
+
+There's an annoying [[https://github.com/wallyqs/org-ruby/issues/62][bug]] in the GitHub renderer for Org-Mode files. It does not allow using =#+property= constructions to specify global variables for the =src= blocks. More specifically, the renderer does not take into account the =:exports both= property and the =#+RESULTS= blocks will not be rendered. The existing workaround for this is to specifically use =:exports both= with every =src= block in the document.
+
+** Directory
+
+- [[file:git_blobs.org::+title: Git - Blob Objects][Blob objects]]
+- [[file:git_commit_objects.org::+title: Git - Commit Objects][Commit objects]]
+- [[file:git_tree_objects.org::+title: Git - Tree Objects][Tree objects]] 
+- [[file:git_staging.org::+title: Git - Staging][Staging]]
+
 
