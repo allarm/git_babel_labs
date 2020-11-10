@@ -7,7 +7,7 @@ Blobs ~do not~ store filenames, only content.
 
 * Lab | ~C-c on the property string first!~
 
-#+property: header-args :dir /Users/allarm/Tmp/git_lab_1 :results output drawer :var gitpath="/Users/allarm/Tmp/git_lab_1"
+#+property: header-args :dir /Users/allarm/Tmp/git_lab_1 :results output :wrap "example"
 
 ** Clean it up | ~execute it first~
 
@@ -28,11 +28,12 @@ esac
 #+end_src
 
 #+RESULTS:
-:results:
+#+begin_example
+/Users/allarm/Tmp/git_lab_1
 total 0
-drwxr-xr-x   2 allarm  staff   64 Nov 10 15:03 .
-drwxr-xr-x  23 allarm  staff  736 Nov  9 18:06 ..
-:end:
+drwxr-xr-x   2 allarm  staff   64 Nov 10 17:45 .
+drwxr-xr-x  24 allarm  staff  768 Nov 10 17:45 ..
+#+end_example
 
 ** Set it up
 :PROPERTIES:
@@ -48,13 +49,13 @@ git commit -m "First commit"
 #+end_src
 
 #+RESULTS:
-:results:
+#+begin_example
 Initialized empty Git repository in /Users/allarm/Tmp/git_lab_1/.git/
-[master (root-commit) 49b653f] First commit
+[master (root-commit) 5bf768d] First commit
  2 files changed, 2 insertions(+)
  create mode 100644 goodbye.txt
  create mode 100644 hello.txt
-:end:
+#+end_example
 
 ** Let's roll
 
@@ -69,14 +70,14 @@ done
 #+end_src
 
 #+RESULTS:
-:results:
+#+begin_example
 c12fddafdaba3b7b1281f50c9e482ed673f1767c : blob
+5bf768d096e2c36328378880c867a9c96bdb4ed4 : commit
 cd0875583aabe89ee197ea133980a9085d08e497 : blob
-49b653f42a907a8c9036f685551bcc5790405163 : commit
 47d9d5e85fd40a8dc8fa4a1eeba8520b239c5ab4 : tree
-:end:
+#+end_example
 
-Now let's take a loot at the contents of the blobs.
+Let's take a loot at the contents of the blobs.
 
 #+begin_src bash
 objects=$(find .git/objects -type f | awk -F"/" '{print $3$4}')
@@ -94,7 +95,7 @@ done
 #+end_src
 
 #+RESULTS:
-:results:
+#+begin_example
 [ c12fddafdaba3b7b1281f50c9e482ed673f1767c : blob ]
 
 Goodbye world :(
@@ -103,4 +104,4 @@ Goodbye world :(
 
 Hello world!
 
-:end:
+#+end_example
